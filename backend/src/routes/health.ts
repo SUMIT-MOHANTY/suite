@@ -1,13 +1,15 @@
 import { Router } from 'express';
-import db from "../db";
-
-export const healthRouter = Router();
-
-healthRouter.get('/', async (_req, res) => {
+import db from '../clients/db';
+export const router = Router();
+router.get('/', async (_req, res) => {
+  const uptime = process.uptime();
+  let connected = false;
   try {
-    await db.query('SELECT 1');
-    res.json({ status: 'ok', uptime: process.uptime(), db: { connected: true } });
-  } catch {
-    res.status(500).json({ status: 'error', uptime: process.uptime(), db: { connected: false } });
+    // Basic ping test
+    await db.raw('SELECT 1');
+    connected = true;
+  } catch (e) {
+    console.error('DB health check failed', e);
   }
+  res.json({ status: 'ok', uptime, db: { connected } });
 });

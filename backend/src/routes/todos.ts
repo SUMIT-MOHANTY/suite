@@ -1,47 +1,57 @@
 import { Router } from 'express';
 import { v4 as uuid } from 'uuid';
-import db from "../db";
+import db from '../clients/db';
 
-const router = Router();
+export const router = Router();
 
-router.get('/api/v1/todos', async (_req, res) => {
-  const rows = await db.query('SELECT id,title,done FROM todos');
-  res.json(rows);
+interface Todo {
+  id: string;
+  title: string;
+  done: boolean;
+}
+
+router.get('/', async (_req, res) => {
+  const rows = await db('todos').select();
+  const todos: Todo[] = rows.map((row: any) => ({
+    id: row.id,
+    title: row.title,
+    done: Boolean(row.done),
+  }));
+  res.json(todos);
 });
 
-router.post('/api/v1/todos', async (req, res) => {
-  const title = (req.body.title || '').trim();
-  if (!title) return res.status(400).end();
-  const id = uuid();
-  const created = new Date().toISOString();
-  await db.query('INSERT INTO todos(id,title,done,created,updated) VALUES (?,?,false,?,?)', [id, title, created, created]);
-  res.status(201).json({ id, title, done: false });
+router.post('/', async (req, res) => {
+  const { title } = req.body;
+  if (!title || typeof title !== 'string' || !title.trim()) {
+    return res.status(400).json({ error: 'Title is required' });
+  }
+  const todo: Todo = { id: uuid(), title: title.trim(), done: false };
+  await db('todos').insert(todo);
+  res.status(201).json(todo);
 });
 
-router.patch('/api/v1/todos/:id', async (req, res) => {
+router.patch('/:id', async (req, res) => {
   const { id } = req.params;
   const { title, done } = req.body;
-  let sql = 'UPDATE todos SET updated = ?';
-  const vals = [new Date().toISOString()];
-  if (title !== undefined) {
-    sql += ', title = ?';
-    vals.push(title);
+  const updates: any = {};
+
+  if (title !== undefined) updates.title = title.trim?.() ?? title;
+  if (done !== undefined) updates.done = Boolean(done);
+
+  if (Object.keys(updates).length === 0) {
+    return res.status(400).json({ error: 'No valid fields to update' });
   }
-  if (done !== undefined) {
-    sql += ', done = ?';
-    vals.push(done);
+
+  const [updated] = await db('todos').where({ id }).update(updates).returning('*');
+  if (!updated) {
+    return res.status(404).json({ error: 'Todo not found' });
   }
-  sql += ' WHERE id = ?';
-  vals.push(id);
-  await db.query(sql, vals);
-  const [row] = await db.query('SELECT id,title,done FROM todos WHERE id = ?', [id]);
-  res.json(row);
+
+  res.json(updated);
 });
 
-router.delete('/api/v1/todos/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  await db.query('DELETE FROM todos WHERE id = ?', [id]);
+  await db('todos').where({ id }).del();
   res.status(204).end();
 });
-
-export default router;
