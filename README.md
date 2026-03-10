@@ -1,8 +1,6 @@
-# Pegasus Platform
+# Pegasus Platform Full-stack monorepo: - **backend** - Django 4.2 LTS + DRF + PostgreSQL 15 - **frontend** - React 18 + TypeScript + Vite + Ant Design + React-Query + Axios
 
-Full-stack monorepo:
+# Local Staging Environment Quick-Start  
+A production-like setup to smoke-test your application locally using Docker containers.
 
-- **backend** - Django 4.2 LTS + DRF + PostgreSQL 15  
-- **frontend** - React 18 + TypeScript + Vite + Ant Design + React-Query + Axios  
-
-### Quick Start (local Docker)
+## Run locally in one command
