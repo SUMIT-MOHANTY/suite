@@ -1,12 +1,16 @@
-import express from 'express'
-import health from './routes/health'
-import todos from './routes/todos'
+import express from 'express';
+import cors from 'cors';
+import { healthRouter } from './routes/health';
+import { todosRouter } from './routes/todos';
 
-const app = express()
-app.use(express.json())
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-app.use(health)
-app.use(todos)
+app.use(cors());
+app.use(express.json());
+app.use('/api/v1/health', healthRouter);
+app.use('/api/v1/todos', todosRouter);
 
-const port = process.env.PORT || 4000
-app.listen(port, () => console.log(`🚀 API listening at ${port}`))
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
