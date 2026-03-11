@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Generate Documents{% endblock %}
+{% block content %}
+<h1>Document Generation</h1>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">Select contacts</label>
+        <select name="contacts" multiple class="form-select">
+            {% for contact in contacts %}
+            <option value="{{ contact.id }}">{{ contact.name }} - {{ contact.role }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Generate Documents</button>
+</form>
+{% endblock %}
