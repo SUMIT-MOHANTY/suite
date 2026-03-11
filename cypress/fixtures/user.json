@@ -1,1 +1,4 @@
-{ "email": "test@example.com", "token": "jwtfa.ketoke.n" }
+{
+  "email": "test@example.com",
+  "password": "Test1234"
+}
