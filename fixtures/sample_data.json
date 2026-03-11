@@ -1,0 +1,211 @@
+[
+{
+  "model": "captives.captive",
+  "pk": 1,
+  "fields": {
+    "name": "Beacon Re Ltd.",
+    "jurisdiction": "CYM",
+    "formation_date": "2023-03-01",
+    "minimum_capital": 1000000,
+    "paid_up_capital": 750000,
+    "surplus": 250000,
+    "status": "ACTIVE",
+    "created_at": "2023-03-01T10:00:00Z",
+    "updated_at": "2023-03-01T10:00:00Z",
+    "deleted_at": null,
+    "created_by": null,
+    "updated_by": null
+  }
+},
+{
+  "model": "captives.captive",
+  "pk": 2,
+  "fields": {
+    "name": "Athena Shield PCC",
+    "jurisdiction": "AVG",
+    "formation_date": "2022-08-15",
+    "minimum_capital": 2500000,
+    "paid_up_capital": 2000000,
+    "surplus": 500000,
+    "status": "ACTIVE",
+    "created_at": "2022-08-15T10:00:00Z",
+    "updated_at": "2022-08-15T10:00:00Z",
+    "deleted_at": null,
+    "created_by": null,
+    "updated_by": null
+  }
+},
+{
+  "model": "captives.captive",
+  "pk": 3,
+  "fields": {
+    "name": "Cobalt Re PPL",
+    "jurisdiction": "BMA",
+    "formation_date": "2021-11-18",
+    "minimum_capital": 500000,
+    "paid_up_capital": 300000,
+    "surplus": 200000,
+    "status": "WIND_UP",
+    "created_at": "2021-11-18T10:00:00Z",
+    "updated_at": "2021-11-18T10:00:00Z",
+    "deleted_at": null,
+    "created_by": null,
+    "updated_by": null
+  }
+},
+
+{
+  "model": "contacts.contact",
+  "pk": 1,
+  "fields": {
+    "first_name": "Alice",
+    "last_name": "Nguyen",
+    "email": "alice@example.com",
+    "phone": "+1-555-1234",
+    "role": "DIRECTOR"
+  }
+},
+{
+  "model": "contacts.contact",
+  "pk": 2,
+  "fields": {
+    "first_name": "Robert",
+    "last_name": "Smith",
+    "email": "robert@example.com",
+    "phone": "+44-20-7890",
+    "role": "SHAREHOLDER"
+  }
+},
+{
+  "model": "contacts.contact",
+  "pk": 3,
+  "fields": {
+    "first_name": "Susan",
+    "last_name": "Lane",
+    "email": "susan@example.com",
+    "phone": "+1-555-4321",
+    "role": "OFFICER"
+  }
+},
+{
+  "model": "contacts.contact",
+  "pk": 4,
+  "fields": {
+    "first_name": "Michael",
+    "last_name": "Chung",
+    "email": "michael@example.com",
+    "phone": "+1-555-9999",
+    "role": "BROKER"
+  }
+},
+{
+  "model": "contacts.contact",
+  "pk": 5,
+  "fields": {
+    "first_name": "Laura",
+    "last_name": "Evans",
+    "email": "laura@example.com",
+    "phone": "+1-555-1111",
+    "role": "ACTUARY"
+  }
+},
+{
+  "model": "contacts.contact",
+  "pk": 6,
+  "fields": {
+    "first_name": "David",
+    "last_name": "Murray",
+    "email": "david@example.com",
+    "phone": "+1-555-2222",
+    "role": "OTHER"
+  }
+},
+{
+  "model": "contacts.contact",
+  "pk": 7,
+  "fields": {
+    "first_name": "Katherine",
+    "last_name": "Patel",
+    "email": "katherine@example.com",
+    "phone": "+1-555-3333",
+    "role": "SHAREHOLDER"
+  }
+},
+{
+  "model": "contacts.contact",
+  "pk": 8,
+  "fields": {
+    "first_name": "James",
+    "last_name": "Chen",
+    "email": "james@example.com",
+    "phone": "+1-555-4444",
+    "role": "DIRECTOR"
+  }
+},
+
+{
+  "model": "policies.policy",
+  "pk": 1,
+  "fields": {
+    "captive": 1,
+    "policy_number": "POL-2024-001",
+    "inception_date": "2024-01-01",
+    "expiration_date": "2024-12-31",
+    "limit": "5000000.00",
+    "premium": "500000.00",
+    "status": "BOUND"
+  }
+},
+{
+  "model": "policies.policy",
+  "pk": 2,
+  "fields": {
+    "captive": 1,
+    "policy_number": "POL-2024-002",
+    "inception_date": "2024-02-01",
+    "expiration_date": "2025-01-31",
+    "limit": "2500000.00",
+    "premium": "300000.00",
+    "status": "BOUND"
+  }
+},
+{
+  "model": "policies.policy",
+  "pk": 3,
+  "fields": {
+    "captive": 2,
+    "policy_number": "POL-2023-015",
+    "inception_date": "2023-07-01",
+    "expiration_date": "2024-06-30",
+    "limit": "10000000.00",
+    "premium": "750000.00",
+    "status": "ENDED"
+  }
+},
+{
+  "model": "policies.policy",
+  "pk": 4,
+  "fields": {
+    "captive": 3,
+    "policy_number": "POL-2021-100",
+    "inception_date": "2021-11-18",
+    "expiration_date": "2022-11-17",
+    "limit": "750000.00",
+    "premium": "175000.00",
+    "status": "CANCELLED"
+  }
+},
+{
+  "model": "policies.policy",
+  "pk": 5,
+  "fields": {
+    "captive": 2,
+    "policy_number": "POL-2024-300",
+    "inception_date": "2024-01-01",
+    "expiration_date": "2024-12-31",
+    "limit": "2000000.00",
+    "premium": "400000.00",
+    "status": "BOUND"
+  }
+}
+]
