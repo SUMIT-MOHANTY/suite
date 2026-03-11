@@ -1,0 +1,108 @@
+Project captive_platform {
+  database_type: 'PostgreSQL'
+}
+
+Table captives {
+  id serial [pk]
+  name varchar(255) [unique, not null]
+  jurisdiction varchar(3) [not null]
+  formation_date date [not null]
+  minimum_capital bigint [default: 0]
+  paid_up_capital bigint [default: 0]
+  surplus bigint [default: 0]
+  status varchar(20) [not null, default: 'ACTIVE']
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+  created_by integer
+  updated_by integer
+  indexes {
+    (name, jurisdiction) [unique]
+  }
+}
+
+Table policies {
+  id serial [pk]
+  captive_id integer [ref: - captives.id]
+  policy_number varchar(50) [unique, not null]
+  inception_date date
+  expiration_date date
+  limit decimal(15,2)
+  premium decimal(15,2)
+  status varchar(20) [not null, default: 'BOUND']
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+  created_by integer
+  updated_by integer
+}
+
+Table claims {
+  id serial [pk]
+  policy_id integer [ref: - policies.id]
+  claim_number varchar(50) [unique, not null]
+  loss_date date
+  reported_date date
+  amount_claimed decimal(15,2)
+  amount_reserved decimal(15,2)
+  amount_paid decimal(15,2)
+  status varchar(20) [not null, default: 'OPEN']
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+  created_by integer
+  updated_by integer
+}
+
+Table contacts {
+  id serial [pk]
+  first_name varchar(100)
+  last_name varchar(100)
+  email varchar(255) [unique]
+  phone varchar(30)
+  role varchar(30) [not null, default: 'OTHER']
+  created_at timestamp
+  updated_at timestamp
+  deleted_at timestamp
+  created_by integer
+  updated_by integer
+}
+
+Table captive_contact {
+  captive_id integer [ref: - captives.id]
+  contact_id integer [ref: - contacts.id]
+  relationship_type varchar(30) [not null]
+  role varchar(50)
+  created_at timestamp
+  primary key (captive_id, contact_id, relationship_type)
+}
+
+Table auditlog {
+  id serial [pk]
+  table_name varchar(50)
+  object_id integer
+  action varchar(10)
+  changes jsonb
+  user_id integer
+  timestamp timestamp
+  indexes {
+    table_name
+    object_id
+    timestamp
+  }
+}
+
+Table financials {
+  id serial [pk]
+  model_type varchar(30) [not null]
+  model_id integer [not null]
+  financial_type varchar(30) [not null]
+  amount decimal(15,2)
+  period_start date
+  period_end date
+  created_at timestamp
+  updated_at timestamp
+  indexes {
+    (model_type, model_id, financial_type, period_start, period_end)
+  }
+}
