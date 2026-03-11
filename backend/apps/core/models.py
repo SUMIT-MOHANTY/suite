@@ -12,6 +12,7 @@ class TimestampedModel(models.Model):
     class Meta:
         abstract = True
 
+
 class AuditMixin(models.Model):
     """
     Optional mixin for created_by/updated_by tracking.

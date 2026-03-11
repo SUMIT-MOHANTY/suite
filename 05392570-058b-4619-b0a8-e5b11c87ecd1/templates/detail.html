@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ captive.name }}{% endblock %}
+{% block content %}
+<h1>{{ captive.name }}</h1>
+<dl class="row">
+    <dt class="col-sm-3">Jurisdiction</dt>
+    <dd class="col-sm-9">{{ captive.jurisdiction }}</dd>
+    <dt class="col-sm-3">Formation Date</dt>
+    <dd class="col-sm-9">{{ captive.formation_date|date:"Y-m-d" }}</dd>
+    <dt class="col-sm-3">Minimum Capital</dt>
+    <dd class="col-sm-9">${{ captive.minimum_capital|floatformat:0|intcomma }}</dd>
+    <dt class="col-sm-3">Paid-up Capital</dt>
+    <dd class="col-sm-9">${{ captive.paid_up_capital|floatformat:0|intcomma }}</dd>
+    <dt class="col-sm-3">Surplus</dt>
+    <dd class="col-sm-9">${{ captive.surplus|floatformat:0|intcomma }}</dd>
+</dl>
+<a href="{% url 'captive-list' %}" class="btn btn-secondary">Back to List</a>
+{% endblock %}

@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 from apps.core.models import TimestampedModel, AuditMixin
 
 User = get_user_model()
+
 
 class Captive(TimestampedModel, AuditMixin):
     JURISDICTION_CHOICES = [
@@ -14,6 +16,7 @@ class Captive(TimestampedModel, AuditMixin):
         ("LUX", "Luxembourg"),
         ("DMH", "Domicile Other"),
     ]
+
     STATUS_CHOICES = [
         ("ACTIVE", "Active"),
         ("INACTIVE", "Inactive"),
@@ -21,21 +24,35 @@ class Captive(TimestampedModel, AuditMixin):
         ("DISSOLVED", "Dissolved"),
         ("WIND_UP", "Wind-up"),
     ]
-    
+
     name = models.CharField(max_length=255, unique=True, verbose_name=_("Name"))
-    jurisdiction = models.CharField(max_length=3, choices=JURISDICTION_CHOICES, verbose_name=_("Jurisdiction"))
+    jurisdiction = models.CharField(
+        max_length=3, choices=JURISDICTION_CHOICES, verbose_name=_("Jurisdiction")
+    )
     formation_date = models.DateField(verbose_name=_("Formation Date"))
-    minimum_capital = models.BigIntegerField(default=0, verbose_name=_("Minimum Capital Required"))
-    paid_up_capital = models.BigIntegerField(default=0, verbose_name=_("Paid-up Capital"))
+    minimum_capital = models.BigIntegerField(
+        default=0, verbose_name=_("Minimum Capital Required")
+    )
+    paid_up_capital = models.BigIntegerField(
+        default=0, verbose_name=_("Paid-up Capital")
+    )
     surplus = models.BigIntegerField(default=0, verbose_name=_("Surplus Amount"))
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="ACTIVE", verbose_name=_("Status"))
-    
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="ACTIVE",
+        verbose_name=_("Status"),
+    )
+
     class Meta:
         db_table = "captives_captive"
         verbose_name = _("Captive")
         verbose_name_plural = _("Captives")
         constraints = [
-            models.UniqueConstraint(fields=["name", "jurisdiction"], name="unique_name_jurisdiction"),
+            models.UniqueConstraint(
+                fields=["name", "jurisdiction"],
+                name="unique_name_jurisdiction",
+            ),
         ]
         indexes = [
             models.Index(fields=["jurisdiction"]),

@@ -6,7 +6,6 @@ from django.db.models import Count
 from .models import CaptiveModel
 from .serializers import CaptiveSerializer, CaptiveListSerializer
 
-
 @extend_schema_view(
     list=extend_schema(
         description="List all captives with pagination",
@@ -63,9 +62,8 @@ from .serializers import CaptiveSerializer, CaptiveListSerializer
 )
 class CaptiveViewSet(viewsets.ModelViewSet):
     """Captive management CRUD operations"""
-    
     queryset = CaptiveModel.objects.all()
-    
+
     def get_queryset(self):
         """Annotate queryset with policy count for list view"""
         if self.action == 'list':
@@ -73,16 +71,16 @@ class CaptiveViewSet(viewsets.ModelViewSet):
                 _policy_count=Count('policies')  # Assuming related_name='policies'
             )
         return self.queryset
-    
+
     def get_serializer_class(self):
         if self.action == 'list':
             return CaptiveListSerializer
         return CaptiveSerializer
-    
+
     def perform_create(self, serializer):
         """Override to set created_by"""
         serializer.save(created_by=self.request.user if self.request.user.is_authenticated else None)
-    
+
     def perform_update(self, serializer):
         """Override to set updated_by"""
         serializer.save(updated_by=self.request.user if self.request.user.is_authenticated else None)

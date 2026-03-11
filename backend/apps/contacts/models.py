@@ -34,6 +34,7 @@ class CaptiveContact(models.Model):
         ("DIRECTOR", "Director"),
         ("OFFICER", "Officer"),
     ]
+
     captive = models.ForeignKey(
         "captives.Captive", on_delete=models.CASCADE, related_name="cc_links"
     )
