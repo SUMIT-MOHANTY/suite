@@ -1,0 +1,86 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "username": "admin",
+    "email": "admin.admin@captive.com",
+    "password": "pbkdf2_sha256$600000$dummy$dummyDx+xyzAGJw=",  # TempPass123!
+    "first_name": "Admin",
+    "last_name": "User",
+    "is_active": true,
+    "is_staff": true,
+    "role": "admin"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "username": "underwriter",
+    "email": "underwriter.admin@captive.com",
+    "password": "pbkdf2_sha256$600000$dummy$dummyDx+xyzAGJw=",  # TempPass123!
+    "first_name": "Under",
+    "last_name": "Writer",
+    "is_active": true,
+    "is_staff": false,
+    "role": "underwriter"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "username": "accounting_mgr",
+    "email": "accounting_mgr.admin@captive.com",
+    "password": "pbkdf2_sha256$600000$dummy$dummyDx+xyzAGJw=",  # TempPass123!
+    "first_name": "Accounting",
+    "last_name": "Mgr",
+    "is_active": true,
+    "is_staff": false,
+    "role": "accounting_mgr"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "username": "relationship_mgr",
+    "email": "relationship_mgr.admin@captive.com",
+    "password": "pbkdf2_sha256$600000$dummy$dummyDx+xyzAGJw=",  # TempPass123!
+    "first_name": "Relationship",
+    "last_name": "Mgr",
+    "is_active": true,
+    "is_staff": false,
+    "role": "relationship_mgr"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "username": "claims_mgr",
+    "email": "claims_mgr.admin@captive.com",
+    "password": "pbkdf2_sha256$600000$dummy$dummyDx+xyzAGJw=",  # TempPass123!
+    "first_name": "Claims",
+    "last_name": "Mgr",
+    "is_active": true,
+    "is_staff": false,
+    "role": "claims_mgr"
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "username": "compliance_officer",
+    "email": "compliance_officer.admin@captive.com",
+    "password": "pbkdf2_sha256$600000$dummy$dummyDx+xyzAGJw=",  # TempPass123!
+    "first_name": "Compliance",
+    "last_name": "Officer",
+    "is_active": true,
+    "is_staff": false,
+    "role": "compliance_officer"
+  }
+}
+]
